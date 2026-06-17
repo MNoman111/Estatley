@@ -8,9 +8,15 @@ export default function Footer() {
           <div>
             <div className="logo" style={{ color: '#fff' }}>🏠 Estat<span style={{ color: 'var(--orange)' }}>ley</span></div>
             <p style={{ marginTop: 10, fontSize: 14, maxWidth: 320 }}>
-              Pakistan's demo property portal. Browse houses, flats, plots and commercial
+              Pakistan's modern property portal. Browse houses, flats, plots and commercial
               listings for sale and rent across major cities.
             </p>
+            <div className="social">
+              <a href="#" aria-label="Facebook">f</a>
+              <a href="#" aria-label="Twitter">𝕏</a>
+              <a href="#" aria-label="Instagram">◎</a>
+              <a href="#" aria-label="LinkedIn">in</a>
+            </div>
           </div>
           <div>
             <h4>Explore</h4>

@@ -8,6 +8,7 @@ export default function Listings() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState({ items: [], total: 0, pages: 1, page: 1 });
   const [loading, setLoading] = useState(true);
+  const [view, setView] = useState(() => localStorage.getItem('zc_view') || 'grid');
 
   const get = (k) => searchParams.get(k) || '';
   const setParam = (k, v) => {
@@ -16,6 +17,8 @@ export default function Listings() {
     next.delete('page');
     setSearchParams(next);
   };
+
+  const setViewMode = (v) => { setView(v); localStorage.setItem('zc_view', v); };
 
   useEffect(() => {
     setLoading(true);
@@ -32,10 +35,12 @@ export default function Listings() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const activeFilters = ['q', 'city', 'type', 'purpose', 'minPrice', 'maxPrice', 'bedrooms'].filter((k) => get(k));
+
   return (
     <div className="container listing-layout">
       <aside className="filters">
-        <h3>Filters</h3>
+        <h3>⚙️ Filters</h3>
         <div className="filter-group">
           <label>Search</label>
           <input value={get('q')} onChange={(e) => setParam('q', e.target.value)} placeholder="Location, title…" />
@@ -76,26 +81,44 @@ export default function Listings() {
             {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>{n}+</option>)}
           </select>
         </div>
-        <button className="btn btn-outline btn-block" onClick={() => setSearchParams({})}>Reset Filters</button>
+        <button className="btn btn-outline btn-block" onClick={() => setSearchParams({})} disabled={!activeFilters.length}>
+          Reset Filters
+        </button>
       </aside>
 
       <section>
         <div className="toolbar">
-          <span className="count">{data.total} propert{data.total === 1 ? 'y' : 'ies'} found</span>
-          <select value={get('sort') || 'newest'} onChange={(e) => setParam('sort', e.target.value)} style={{ padding: '9px 10px', borderRadius: 8, border: '1px solid var(--line)' }}>
-            <option value="newest">Newest First</option>
-            <option value="priceAsc">Price: Low to High</option>
-            <option value="priceDesc">Price: High to Low</option>
-          </select>
+          <span className="count">{loading ? 'Searching…' : `${data.total} propert${data.total === 1 ? 'y' : 'ies'} found`}</span>
+          <div className="right">
+            <div className="view-toggle">
+              <button className={view === 'grid' ? 'active' : ''} onClick={() => setViewMode('grid')} title="Grid view">▦</button>
+              <button className={view === 'list' ? 'active' : ''} onClick={() => setViewMode('list')} title="List view">☰</button>
+            </div>
+            <select className="sort-select" value={get('sort') || 'newest'} onChange={(e) => setParam('sort', e.target.value)}>
+              <option value="newest">Newest First</option>
+              <option value="priceAsc">Price: Low to High</option>
+              <option value="priceDesc">Price: High to Low</option>
+            </select>
+          </div>
         </div>
 
         {loading ? (
-          <div className="spinner">Loading properties…</div>
+          <div className={`grid ${view === 'list' ? 'list-view' : ''}`}>
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div className="skeleton" key={i}>
+                <div className="sk-img" />
+                <div className="sk-line" /><div className="sk-line short" />
+              </div>
+            ))}
+          </div>
         ) : data.items.length === 0 ? (
-          <div className="center-empty">No properties match your filters. Try adjusting them.</div>
+          <div className="center-empty">
+            <div style={{ fontSize: 46, marginBottom: 10 }}>🔍</div>
+            No properties match your filters. Try adjusting them.
+          </div>
         ) : (
           <>
-            <div className="grid">
+            <div className={`grid ${view === 'list' ? 'list-view' : ''}`}>
               {data.items.map((p) => <PropertyCard key={p._id} property={p} />)}
             </div>
             {data.pages > 1 && (
