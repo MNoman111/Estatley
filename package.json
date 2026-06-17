@@ -1,9 +1,9 @@
 {
-  "name": "estatley",
+  "name": "nestaro",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Estatley — MERN real estate portal, deployable on Vercel",
+  "description": "Nestaro — MERN real estate portal, deployable on Vercel",
   "engines": {
     "node": ">=18"
   },

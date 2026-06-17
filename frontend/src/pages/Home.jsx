@@ -21,7 +21,7 @@ const featuresList = [
 
 const testimonials = [
   { name: 'Sara Ahmed', role: 'Bought in DHA Lahore', text: 'Found our family home within a week. The filters made it so easy to compare options!', img: 'https://i.pravatar.cc/100?img=47' },
-  { name: 'Usman Tariq', role: 'Rented in Islamabad', text: 'Clean interface and the agent contact was instant. Highly recommend Estatley.', img: 'https://i.pravatar.cc/100?img=12' },
+  { name: 'Usman Tariq', role: 'Rented in Islamabad', text: 'Clean interface and the agent contact was instant. Highly recommend Nestaro.', img: 'https://i.pravatar.cc/100?img=12' },
   { name: 'Hina Raza', role: 'Sold in Karachi', text: 'Listed my apartment and got serious inquiries the same day. Smooth experience.', img: 'https://i.pravatar.cc/100?img=32' },
 ];
 
@@ -114,7 +114,7 @@ export default function Home() {
       <section className="section container">
         <Reveal>
           <div style={{ textAlign: 'center', maxWidth: 620, margin: '0 auto 36px' }}>
-            <div className="eyebrow-line">Why Estatley</div>
+            <div className="eyebrow-line">Why Nestaro</div>
             <h2>Everything you need to move with confidence</h2>
           </div>
         </Reveal>

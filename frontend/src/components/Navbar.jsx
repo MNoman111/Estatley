@@ -44,7 +44,7 @@ export default function Navbar() {
   return (
     <header className={`nav ${scrolled ? 'scrolled' : ''}`}>
       <div className="container nav-inner">
-        <Link to="/" className="logo">🏠 Estat<span className="dot">ley</span></Link>
+        <Link to="/" className="logo">🏠 Nest<span className="dot">aro</span></Link>
         <nav className="nav-links">
           <NavLink to="/properties?purpose=sale">Buy</NavLink>
           <NavLink to="/properties?purpose=rent">Rent</NavLink>

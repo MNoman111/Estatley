@@ -1,7 +1,7 @@
 {
-  "name": "estatley-backend",
+  "name": "nestaro-backend",
   "version": "1.0.0",
-  "description": "Estatley — MERN real estate portal API",
+  "description": "Nestaro — MERN real estate portal API",
   "main": "server.js",
   "type": "module",
   "scripts": {

@@ -2,7 +2,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import { execSync, spawn } from 'child_process';
 
 const mongod = await MongoMemoryServer.create({ binary: { version: '7.0.14' } });
-const uri = mongod.getUri('estatley');
+const uri = mongod.getUri('nestaro');
 const env = { ...process.env, MONGO_URI: uri, JWT_SECRET: 'testsecret', PORT: '5099' };
 
 // 1. Seed
@@ -42,7 +42,7 @@ try {
   check('GET /properties/:id populates agent', !!r.body.agent?.name);
 
   // Login as agent
-  r = await j(await fetch(`${base}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: 'imran@estatley.pk', password: 'password123' }) }));
+  r = await j(await fetch(`${base}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: 'imran@nestaro.pk', password: 'password123' }) }));
   check('agent login returns token', !!r.body.token);
   const token = r.body.token;
   const auth = { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` };

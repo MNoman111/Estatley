@@ -16,12 +16,12 @@ const PHOTOS = {
 };
 
 const agentsData = [
-  { name: 'Imran Khan', email: 'imran@estatley.pk', phone: '+92 300 1234567', agency: 'Premier Estates', about: 'Specialist in DHA & Bahria Town properties with 12 years of experience.' },
-  { name: 'Ayesha Malik', email: 'ayesha@estatley.pk', phone: '+92 321 7654321', agency: 'CityScape Realty', about: 'Helping families find their dream homes across Lahore and Islamabad.' },
-  { name: 'Bilal Ahmed', email: 'bilal@estatley.pk', phone: '+92 333 9988776', agency: 'Skyline Properties', about: 'Commercial & residential investment advisor in Karachi.' },
+  { name: 'Imran Khan', email: 'imran@nestaro.pk', phone: '+92 300 1234567', agency: 'Premier Estates', about: 'Specialist in DHA & Bahria Town properties with 12 years of experience.' },
+  { name: 'Ayesha Malik', email: 'ayesha@nestaro.pk', phone: '+92 321 7654321', agency: 'CityScape Realty', about: 'Helping families find their dream homes across Lahore and Islamabad.' },
+  { name: 'Bilal Ahmed', email: 'bilal@nestaro.pk', phone: '+92 333 9988776', agency: 'Skyline Properties', about: 'Commercial & residential investment advisor in Karachi.' },
 ];
 
-const userData = { name: 'Demo User', email: 'user@estatley.pk', phone: '+92 312 0000000', role: 'user' };
+const userData = { name: 'Demo User', email: 'user@nestaro.pk', phone: '+92 312 0000000', role: 'user' };
 
 const buildProperties = (agents) => {
   const [a0, a1, a2] = agents;
