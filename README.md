@@ -88,12 +88,13 @@ git push -u origin main
 4. Click **Deploy**.
 
 ### 4. Seed the production database (once)
-After the first deploy, populate the 20 listings + demo users by calling the protected seed endpoint:
-```bash
-curl -X POST "https://<your-app>.vercel.app/api/seed?secret=<SEED_SECRET>"
+After the first deploy, populate the 20 listings + demo users. **Easiest way:** paste this URL into your browser (replace the placeholders):
 ```
-You should get `{"message":"Database seeded","properties":20,...}`. Visit your site — listings appear.
-(You can instead seed locally; see below. The endpoint wipes and reloads the demo data, so remove `SEED_SECRET` afterwards if you like.)
+https://<your-app>.vercel.app/api/seed?secret=<SEED_SECRET>
+```
+You should see `{"message":"✅ Database seeded successfully","properties":20,...}`. Refresh your site — listings appear.
+
+(Alternatives: `curl -X POST "https://<your-app>.vercel.app/api/seed?secret=<SEED_SECRET>"`, or seed locally with `npm run seed` pointing at your Atlas `MONGO_URI`. The endpoint wipes and reloads the demo data, so you can delete `SEED_SECRET` afterwards to disable it.)
 
 > **Tip:** You can also deploy from the CLI: `npm i -g vercel && vercel`. Set the env vars with `vercel env add`.
 
