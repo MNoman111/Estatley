@@ -1,11 +1,35 @@
-import { useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const menuRef = useRef(null);
+
+  // Close the dropdown whenever the route changes.
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname, location.search]);
+
+  // Close the dropdown when clicking outside it or pressing Escape.
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setOpen(false);
+    };
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('mousedown', onClick);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onClick);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
 
   const handleLogout = () => {
     logout();
@@ -24,7 +48,7 @@ export default function Navbar() {
           <NavLink to="/properties?purpose=rent">Rent</NavLink>
           <NavLink to="/properties">All Properties</NavLink>
           {user ? (
-            <div className="menu-wrap">
+            <div className="menu-wrap" ref={menuRef}>
               <button className="btn-ghost" onClick={() => setOpen((o) => !o)} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
                 <img className="avatar" src={user.avatar} alt={user.name} />
                 {user.name.split(' ')[0]} ▾
