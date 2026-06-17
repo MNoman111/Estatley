@@ -1,7 +1,7 @@
 {
-  "name": "zameen-clone-backend",
+  "name": "estatley-backend",
   "version": "1.0.0",
-  "description": "MERN real estate portal API (Zameen.com style)",
+  "description": "Estatley — MERN real estate portal API",
   "main": "server.js",
   "type": "module",
   "scripts": {

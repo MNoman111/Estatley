@@ -1,14 +1,14 @@
 {
-  "name": "zameen-clone",
+  "name": "estatley",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "MERN real estate portal (Zameen.com style) — deployable on Vercel",
+  "description": "Estatley — MERN real estate portal, deployable on Vercel",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "build": "npm install --prefix frontend && npm run build --prefix frontend",
+    "build": "npm install --prefix frontend --include=dev && npm run build --prefix frontend",
     "seed": "node backend/seed/seed.js",
     "dev:backend": "npm --prefix backend run dev",
     "dev:frontend": "npm --prefix frontend run dev"

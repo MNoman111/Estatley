@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer-cols">
           <div>
-            <div className="logo" style={{ color: '#fff' }}>🏠 Zameen<span style={{ color: 'var(--orange)' }}>Clone</span></div>
+            <div className="logo" style={{ color: '#fff' }}>🏠 Estat<span style={{ color: 'var(--orange)' }}>ley</span></div>
             <p style={{ marginTop: 10, fontSize: 14, maxWidth: 320 }}>
               Pakistan's demo property portal. Browse houses, flats, plots and commercial
               listings for sale and rent across major cities.
@@ -34,7 +34,7 @@ export default function Footer() {
             <a href="#">Privacy</a>
           </div>
         </div>
-        <div className="copy">© {new Date().getFullYear()} ZameenClone — Demo project. Not affiliated with Zameen.com.</div>
+        <div className="copy">© {new Date().getFullYear()} Estatley — Demo project for portfolio/learning purposes.</div>
       </div>
     </footer>
   );

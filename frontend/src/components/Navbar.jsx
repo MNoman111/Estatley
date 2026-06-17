@@ -17,7 +17,7 @@ export default function Navbar() {
     <header className="nav">
       <div className="container nav-inner">
         <Link to="/" className="logo">
-          🏠 Zameen<span className="dot">Clone</span>
+          🏠 Estat<span className="dot">ley</span>
         </Link>
         <nav className="nav-links">
           <NavLink to="/properties?purpose=sale">Buy</NavLink>

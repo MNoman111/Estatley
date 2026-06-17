@@ -1,4 +1,4 @@
-# 🏠 ZameenClone — MERN Real Estate Portal (Vercel-ready)
+# 🏠 Estatley — MERN Real Estate Portal (Vercel-ready)
 
 A full-stack property marketplace inspired by [Zameen.com](https://www.zameen.com), built on the **MERN** stack (MongoDB, Express, React, Node.js) and configured to deploy on **Vercel** as a single project (static React frontend + serverless Express API).
 
@@ -14,7 +14,7 @@ A full-stack property marketplace inspired by [Zameen.com](https://www.zameen.co
 - **JWT authentication** — register/login as a buyer/renter or an agent
 - **Agent dashboard** — post, edit and delete listings
 - **Favorites**, **agent profiles**, **profile editing**
-- Responsive, Zameen-style green UI
+- Responsive, modern green UI
 
 ## 🧱 Tech Stack
 
@@ -31,7 +31,7 @@ A full-stack property marketplace inspired by [Zameen.com](https://www.zameen.co
 ## 📁 Structure
 
 ```
-zameen-clone/
+estatley/
 ├── api/
 │   └── index.js          # Vercel serverless entry — wraps the Express app
 ├── backend/
@@ -62,15 +62,15 @@ How routing works on Vercel: `vercel.json` builds the frontend to `frontend/dist
 2. **Database Access** → add a user (username + password).
 3. **Network Access** → add IP `0.0.0.0/0` (allow from anywhere — Vercel uses dynamic IPs).
 4. **Connect → Drivers** → copy the connection string, e.g.
-   `mongodb+srv://USER:PASS@cluster0.xxxxx.mongodb.net/zameen_clone?retryWrites=true&w=majority`
-   (add `/zameen_clone` before the `?` so it uses that database).
+   `mongodb+srv://USER:PASS@cluster0.xxxxx.mongodb.net/estatley?retryWrites=true&w=majority`
+   (add `/estatley` before the `?` so it uses that database).
 
 ### 2. Push the project to GitHub
 ```bash
-cd zameen-clone
-git init && git add . && git commit -m "ZameenClone MERN"
+cd estatley
+git init && git add . && git commit -m "Estatley MERN"
 git branch -M main
-git remote add origin https://github.com/<you>/zameen-clone.git
+git remote add origin https://github.com/<you>/estatley.git
 git push -u origin main
 ```
 
@@ -129,10 +129,10 @@ Password for all accounts: **`password123`**
 
 | Role  | Email                 |
 |-------|-----------------------|
-| Agent | imran@zameenclone.pk  |
-| Agent | ayesha@zameenclone.pk |
-| Agent | bilal@zameenclone.pk  |
-| User  | user@zameenclone.pk   |
+| Agent | imran@estatley.pk  |
+| Agent | ayesha@estatley.pk |
+| Agent | bilal@estatley.pk  |
+| User  | user@estatley.pk   |
 
 Log in as an **agent** to post/edit/delete listings; as a **user** to save favorites; or register a new account.
 
