@@ -1,8 +1,6 @@
 # 🏠 Nestaro — MERN Real Estate Portal (Vercel-ready)
 
-A full-stack property marketplace inspired by [Zameen.com](https://www.zameen.com), built on the **MERN** stack (MongoDB, Express, React, Node.js) and configured to deploy on **Vercel** as a single project (static React frontend + serverless Express API).
-
-> Demo project — not affiliated with Zameen.com. Listing photos are royalty-free images from Unsplash.
+A full-stack property marketplace built on the **MERN** stack (MongoDB, Express, React, Node.js) and configured to deploy on **Vercel** as a single project (static React frontend + serverless Express API).
 
 ---
 
@@ -125,7 +123,7 @@ Vite proxies `/api` → `http://localhost:5000` automatically. Open **http://loc
 
 ---
 
-## 🔑 Demo Accounts
+## 🔑 Sample Accounts
 Password for all accounts: **`password123`**
 
 | Role  | Email                 |

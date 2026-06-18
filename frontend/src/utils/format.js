@@ -13,7 +13,5 @@ export const formatPrice = (price) => {
   return `PKR ${price}`;
 };
 
-export const formatArea = (area, unit) => `${area} ${unit}`;
-
 export const cities = ['Lahore', 'Karachi', 'Islamabad', 'Rawalpindi'];
 export const types = ['House', 'Flat', 'Upper Portion', 'Lower Portion', 'Farm House', 'Plot', 'Shop', 'Office', 'Building'];

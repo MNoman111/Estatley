@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useTheme } from '../context/ThemeContext.jsx';
+import LogoMark from './LogoMark.jsx';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -44,7 +45,7 @@ export default function Navbar() {
   return (
     <header className={`nav ${scrolled ? 'scrolled' : ''}`}>
       <div className="container nav-inner">
-        <Link to="/" className="logo">🏠 Nest<span className="dot">aro</span></Link>
+        <Link to="/" className="logo"><LogoMark size={36} />Nest<span className="dot">aro</span></Link>
         <nav className="nav-links">
           <NavLink to="/properties?purpose=sale">Buy</NavLink>
           <NavLink to="/properties?purpose=rent">Rent</NavLink>

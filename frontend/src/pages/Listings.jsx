@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import client from '../api/client.js';
 import PropertyCard from '../components/PropertyCard.jsx';
@@ -20,12 +20,26 @@ export default function Listings() {
 
   const setViewMode = (v) => { setView(v); localStorage.setItem('zc_view', v); };
 
+  // Debounced search box: type freely, the URL (and fetch) updates after a pause.
+  const [qInput, setQInput] = useState(get('q'));
+  useEffect(() => { setQInput(get('q')); }, [searchParams]); // keep in sync with reset / city links
+  const firstRun = useRef(true);
+  useEffect(() => {
+    if (firstRun.current) { firstRun.current = false; return; }
+    if (qInput === get('q')) return;
+    const t = setTimeout(() => setParam('q', qInput.trim()), 400);
+    return () => clearTimeout(t);
+  }, [qInput]); // eslint-disable-line
+
   useEffect(() => {
     setLoading(true);
+    const controller = new AbortController();
     const params = Object.fromEntries(searchParams.entries());
-    client.get('/properties', { params })
+    client.get('/properties', { params, signal: controller.signal })
       .then((res) => setData(res.data))
+      .catch((e) => { if (e.name !== 'CanceledError') setLoading(false); })
       .finally(() => setLoading(false));
+    return () => controller.abort();
   }, [searchParams]);
 
   const goPage = (p) => {
@@ -43,7 +57,7 @@ export default function Listings() {
         <h3>⚙️ Filters</h3>
         <div className="filter-group">
           <label>Search</label>
-          <input value={get('q')} onChange={(e) => setParam('q', e.target.value)} placeholder="Location, title…" />
+          <input value={qInput} onChange={(e) => setQInput(e.target.value)} placeholder="Location, title…" />
         </div>
         <div className="filter-group">
           <label>Purpose</label>

@@ -21,7 +21,7 @@ const agentsData = [
   { name: 'Bilal Ahmed', email: 'bilal@nestaro.pk', phone: '+92 333 9988776', agency: 'Skyline Properties', about: 'Commercial & residential investment advisor in Karachi.' },
 ];
 
-const userData = { name: 'Demo User', email: 'user@nestaro.pk', phone: '+92 312 0000000', role: 'user' };
+const userData = { name: 'Ali Hassan', email: 'user@nestaro.pk', phone: '+92 312 0000000', role: 'user' };
 
 const buildProperties = (agents) => {
   const [a0, a1, a2] = agents;

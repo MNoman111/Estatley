@@ -4,6 +4,7 @@ import client from '../api/client.js';
 import PropertyCard from '../components/PropertyCard.jsx';
 import Reveal from '../components/Reveal.jsx';
 import { cities, types } from '../utils/format.js';
+import { getRecent } from '../utils/recentlyViewed.js';
 
 const cityImages = {
   Lahore: 'https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=600&q=80',
@@ -32,6 +33,7 @@ export default function Home() {
   const [q, setQ] = useState('');
   const [city, setCity] = useState('');
   const [type, setType] = useState('');
+  const [recent] = useState(getRecent);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,6 +89,20 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {recent.length > 0 && (
+        <section className="section container" style={{ paddingBottom: 0 }}>
+          <div className="section-head">
+            <div>
+              <div className="eyebrow-line">Pick up where you left off</div>
+              <h2>Recently Viewed</h2>
+            </div>
+          </div>
+          <div className="grid">
+            {recent.slice(0, 4).map((p) => <PropertyCard key={p._id} property={p} />)}
+          </div>
+        </section>
+      )}
 
       <section className="section container">
         <Reveal>

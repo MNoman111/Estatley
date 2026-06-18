@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import LogoMark from './LogoMark.jsx';
 
 export default function Footer() {
   return (
@@ -6,7 +7,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer-cols">
           <div>
-            <div className="logo" style={{ color: '#fff' }}>🏠 Nest<span style={{ color: 'var(--gold)' }}>aro</span></div>
+            <div className="logo" style={{ color: '#fff' }}><LogoMark size={34} />Nest<span style={{ color: 'var(--gold)' }}>aro</span></div>
             <p style={{ marginTop: 10, fontSize: 14, maxWidth: 320 }}>
               Pakistan's modern property portal. Browse houses, flats, plots and commercial
               listings for sale and rent across major cities.
@@ -40,7 +41,7 @@ export default function Footer() {
             <a href="#">Privacy</a>
           </div>
         </div>
-        <div className="copy">© {new Date().getFullYear()} Nestaro — Demo project for portfolio/learning purposes.</div>
+        <div className="copy">© {new Date().getFullYear()} Nestaro. All rights reserved.</div>
       </div>
     </footer>
   );

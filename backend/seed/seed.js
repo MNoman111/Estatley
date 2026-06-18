@@ -10,7 +10,7 @@ const run = async () => {
   console.log('🧹 Clearing existing data & seeding...');
   const result = await seedDatabase();
 
-  console.log(`\n✅ Seed complete: ${result.properties} properties, ${result.agents} agents, ${result.users} demo user`);
+  console.log(`\n✅ Seed complete: ${result.properties} properties, ${result.agents} agents, ${result.users} user`);
   console.log('\n🔑 Login credentials (password for all: password123):');
   console.log('   Agent : imran@nestaro.pk');
   console.log('   Agent : ayesha@nestaro.pk');

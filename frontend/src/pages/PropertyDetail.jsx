@@ -4,24 +4,35 @@ import client from '../api/client.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 import { formatPrice } from '../utils/format.js';
+import { addRecent } from '../utils/recentlyViewed.js';
+import MortgageCalc from '../components/MortgageCalc.jsx';
+import PropertyCard from '../components/PropertyCard.jsx';
 
 export default function PropertyDetail() {
   const { id } = useParams();
   const { user, toggleFavorite } = useAuth();
   const toast = useToast();
   const [p, setP] = useState(null);
+  const [similar, setSimilar] = useState([]);
   const [error, setError] = useState('');
   const [lightbox, setLightbox] = useState(null); // index or null
 
   useEffect(() => {
     setP(null);
+    setError('');
     client.get(`/properties/${id}`)
-      .then((res) => setP(res.data))
+      .then((res) => {
+        setP(res.data);
+        addRecent(res.data);
+        return client.get('/properties', { params: { city: res.data.city, purpose: res.data.purpose, limit: 7 } });
+      })
+      .then((res) => res && setSimilar(res.data.items.filter((x) => x._id !== id).slice(0, 3)))
       .catch(() => setError('Property not found.'));
   }, [id]);
 
   useEffect(() => {
-    if (lightbox === null) return;
+    if (lightbox === null || !p) return;
+    const imgs = p.images?.length ? p.images : [];
     const onKey = (e) => {
       if (e.key === 'Escape') setLightbox(null);
       if (e.key === 'ArrowRight') setLightbox((i) => (i + 1) % imgs.length);
@@ -29,7 +40,7 @@ export default function PropertyDetail() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }); // eslint-disable-line
+  }, [lightbox, p]);
 
   if (error) return <div className="center-empty">{error}</div>;
   if (!p) return <div className="spinner">Loading property…</div>;
@@ -43,10 +54,23 @@ export default function PropertyDetail() {
     toast(fav ? '❤️ Saved to favorites' : 'Removed from favorites');
   };
 
+  const handleShare = async () => {
+    const url = window.location.href;
+    try {
+      if (navigator.share) await navigator.share({ title: p.title, text: `${p.title} — ${formatPrice(p.price)}`, url });
+      else { await navigator.clipboard.writeText(url); toast('🔗 Link copied to clipboard'); }
+    } catch { /* user cancelled share */ }
+  };
+
+  const waLink = p.agent?.phone
+    ? `https://wa.me/${p.agent.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in "${p.title}" (${formatPrice(p.price)}) listed on Nestaro.`)}`
+    : null;
+
   return (
     <div className="container detail">
-      <div className="breadcrumb">
+      <div className="breadcrumb" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Link to="/properties" className="muted-link">← Back to listings</Link>
+        <button className="btn btn-outline btn-sm" onClick={handleShare}>🔗 Share</button>
       </div>
 
       <div className="gallery">
@@ -101,6 +125,7 @@ export default function PropertyDetail() {
                 <div style={{ color: 'var(--brand)', fontSize: 14, fontWeight: 600 }}>{p.agent.agency}</div>
                 <div style={{ margin: '14px 0', fontSize: 14, color: 'var(--muted)' }}>📞 {p.agent.phone}</div>
                 <a href={`tel:${p.agent.phone}`} className="btn btn-block">Call Agent</a>
+                {waLink && <a href={waLink} target="_blank" rel="noreferrer" className="btn btn-block" style={{ marginTop: 10, background: '#25D366', boxShadow: 'none' }}>💬 WhatsApp</a>}
                 <a href={`mailto:${p.agent.email}`} className="btn btn-outline btn-block" style={{ marginTop: 10 }}>✉️ Email</a>
                 <button className={`btn btn-block ${isFav ? 'btn-orange' : 'btn-outline'}`} style={{ marginTop: 10 }} onClick={handleFav}>
                   {isFav ? '♥ Saved' : '♡ Save Property'}
@@ -109,8 +134,20 @@ export default function PropertyDetail() {
               </>
             ) : <div>Agent info unavailable</div>}
           </div>
+
+          {p.purpose === 'sale' && <MortgageCalc price={p.price} />}
         </aside>
       </div>
+
+      {similar.length > 0 && (
+        <section style={{ marginTop: 50 }}>
+          <h2 style={{ marginBottom: 6 }}>Similar Properties</h2>
+          <div className="sub" style={{ color: 'var(--muted)', marginBottom: 22 }}>More in {p.city} for {p.purpose}</div>
+          <div className="grid">
+            {similar.map((s) => <PropertyCard key={s._id} property={s} />)}
+          </div>
+        </section>
+      )}
 
       {lightbox !== null && (
         <div className="lightbox" onClick={() => setLightbox(null)}>

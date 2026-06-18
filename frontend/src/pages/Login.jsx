@@ -24,7 +24,6 @@ export default function Login() {
     <div className="auth-wrap">
       <h2>Welcome back</h2>
       <p className="sub">Log in to manage your listings and saved properties.</p>
-      <div className="hint">Demo: <b>imran@nestaro.pk</b> (agent) or <b>user@nestaro.pk</b> — password <b>password123</b></div>
       {error && <div className="alert">{error}</div>}
       <form onSubmit={submit}>
         <div className="field">
